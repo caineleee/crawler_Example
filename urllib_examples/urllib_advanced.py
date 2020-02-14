@@ -86,3 +86,16 @@ opener = build_opener(handle)
 resp = opener.open('https://www.baidu.com')
 print(resp.read().decode('utf-8'))
 
+
+'''
+	用于实现 Robots(爬虫协议) 分析, 判断网站中那些是可以爬取的, 哪些不可以
+'''
+
+from urllib.robotparser import RobotFileParser
+
+robotp = RobotFileParser('http:www.jianshu.com/rebots.txt')
+robotp.read()
+print(robotp.can_fetch('*', 'http:www.jianshu.com/p/b67554025d7d'))  # 如果可以爬取返回 True
+print(robotp.can_fetch('*', 'http:www.jianshu.com/search?q=python&page=1&type=collections'))  # 不可以爬取则返回 False
+
+
